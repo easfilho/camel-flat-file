@@ -1,5 +1,6 @@
-package br.com.flatfile.route.processor;
+package br.com.flatfile.unit.processor;
 
+import br.com.flatfile.processor.FileNameProcessor;
 import br.com.flatfile.route.ConverterFlatFileRoute;
 import org.apache.camel.Exchange;
 import org.apache.camel.RoutesBuilder;
@@ -16,13 +17,13 @@ public class FileNameProcessorTest extends CamelTestSupport {
     private FileNameProcessor fileNameProcessor;
 
     @Override
-    protected RoutesBuilder createRouteBuilder() throws Exception {
+    protected RoutesBuilder createRouteBuilder() {
         fileNameProcessor = new FileNameProcessor();
         return new ConverterFlatFileRoute(fileNameProcessor);
     }
 
     @Test
-    public void shouldRenameFile() throws Exception {
+    public void shouldRenameFile() {
         GenericFile<File> genericFile = new GenericFile<>();
         genericFile.setFileName("input1.dat");
         Exchange exchange = new DefaultExchange(super.context());

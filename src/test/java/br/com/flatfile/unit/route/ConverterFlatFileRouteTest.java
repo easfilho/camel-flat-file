@@ -1,4 +1,4 @@
-package br.com.flatfile.route;
+package br.com.flatfile.unit.route;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
