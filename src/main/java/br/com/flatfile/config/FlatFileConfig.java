@@ -7,27 +7,45 @@ import org.springframework.context.annotation.Configuration;
 public class FlatFileConfig {
 
     public static String SEPARATOR_CHARACTER;
-    public static Integer TAX_ID_POSITION;
-    public static Integer NAME_POSITION;
-    public static Integer SALARY_POSITION;
+    public static Integer SALESMAN_TAX_ID_POSITION;
+    public static Integer SALESMAN_NAME_POSITION;
+    public static Integer SALESMAN_SALARY_POSITION;
+    public static Integer CUSTOMER_TAX_ID_POSITION;
+    public static Integer CUSTOMER_NAME_POSITION;
+    public static Integer CUSTOMER_BUSINESS_AREA_POSITION;
 
     @Value("separator")
     public static void setSeparatorCharacter(String separatorCharacter) {
         SEPARATOR_CHARACTER = separatorCharacter;
     }
 
-    @Value("position.taxId")
-    public static void setTaxIdPosition(Integer taxIdPosition) {
-        TAX_ID_POSITION = taxIdPosition;
+    @Value("position.salesman.taxId")
+    public static void setSalesmanTaxIdPosition(Integer salesmanTaxIdPosition) {
+        SALESMAN_TAX_ID_POSITION = salesmanTaxIdPosition;
     }
 
-    @Value("position.name")
-    public static void setNamePosition(Integer namePosition) {
-        NAME_POSITION = namePosition;
+    @Value("position.salesman.name")
+    public static void setSalesmanNamePosition(Integer salesmanNamePosition) {
+        SALESMAN_NAME_POSITION = salesmanNamePosition;
     }
 
-    @Value("position.salary")
-    public static void setSalaryPosition(Integer salaryPosition) {
-        SALARY_POSITION = salaryPosition;
+    @Value("position.salesman.salary")
+    public static void setSalesmanSalaryPosition(Integer salesmanSalaryPosition) {
+        SALESMAN_SALARY_POSITION = salesmanSalaryPosition;
+    }
+
+    @Value("position.customer.taxId")
+    public static void setCustomerTaxIdPosition(Integer customerTaxIdPosition) {
+        CUSTOMER_TAX_ID_POSITION = customerTaxIdPosition;
+    }
+
+    @Value("position.customer.name")
+    public static void setCustomerNamePosition(Integer customerNamePosition) {
+        CUSTOMER_NAME_POSITION = customerNamePosition;
+    }
+
+    @Value("position.customer.businessArea")
+    public static void setCustomerBusinessAreaPosition(Integer customerBusinessAreaPosition) {
+        CUSTOMER_BUSINESS_AREA_POSITION = customerBusinessAreaPosition;
     }
 }
