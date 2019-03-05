@@ -16,7 +16,7 @@ public class SalesmanServiceTest {
     @Before
     public void setUp() {
         salesmanService = new SalesmanService();
-        FlatFileConfig.setSeparatorCharacter("ç");
+        FlatFileConfig.setDataSeparatorCharacter("ç");
         FlatFileConfig.setSalesmanTaxIdPosition(1);
         FlatFileConfig.setSalesmanNamePosition(2);
         FlatFileConfig.setSalesmanSalaryPosition(3);
