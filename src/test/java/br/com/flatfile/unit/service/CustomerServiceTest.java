@@ -14,10 +14,11 @@ public class CustomerServiceTest {
     @Before
     public void setUp() {
         customerService = new CustomerService();
-        FlatFileConfig.setDataSeparatorCharacter("ç");
-        FlatFileConfig.setCustomerTaxIdPosition(1);
-        FlatFileConfig.setCustomerNamePosition(2);
-        FlatFileConfig.setCustomerBusinessAreaPosition(3);
+        FlatFileConfig flatFileConfig = new FlatFileConfig();
+        flatFileConfig.setDataSeparatorCharacter("ç");
+        flatFileConfig.setCustomerTaxIdPosition(1);
+        flatFileConfig.setCustomerNamePosition(2);
+        flatFileConfig.setCustomerBusinessAreaPosition(3);
     }
 
     @Test

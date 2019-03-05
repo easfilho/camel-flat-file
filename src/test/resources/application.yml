@@ -1,0 +1,30 @@
+data:
+  id:
+    salesman: "001"
+    customer: "002"
+    sale: "003"
+
+separator:
+  data: "ç"
+  dataItem: "-"
+  items: ","
+
+position:
+  data:
+    id: 0
+  salesman:
+    taxId: 1
+    name: 2
+    salary: 3
+  customer:
+    taxId: 1
+    name: 2
+    businessArea: 3
+  sale:
+    id: 1
+    items: 2
+    salesman: 3
+  item:
+    id: 0
+    quantity: 1
+    price: 2

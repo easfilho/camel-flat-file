@@ -19,19 +19,20 @@ public class SaleServiceTest {
     @Before
     public void setUp() {
         saleService = new SaleService();
-        FlatFileConfig.setDataSeparatorCharacter("ç");
-        FlatFileConfig.setDataItemSeparatorCharacter("-");
-        FlatFileConfig.setItemSeparatorCharacter(",");
-        FlatFileConfig.setSaleIdPosition(1);
-        FlatFileConfig.setSaleItemsPosition(2);
-        FlatFileConfig.setSaleSalesmanPosition(3);
-        FlatFileConfig.setItemIdPosition(0);
-        FlatFileConfig.setItemQuantityPosition(1);
-        FlatFileConfig.setItemPricePosition(2);
+        FlatFileConfig flatFileConfig = new FlatFileConfig();
+        flatFileConfig.setDataSeparatorCharacter("ç");
+        flatFileConfig.setDataItemSeparatorCharacter("-");
+        flatFileConfig.setItemSeparatorCharacter(",");
+        flatFileConfig.setSaleIdPosition(1);
+        flatFileConfig.setSaleItemsPosition(2);
+        flatFileConfig.setSaleSalesmanPosition(3);
+        flatFileConfig.setItemIdPosition(0);
+        flatFileConfig.setItemQuantityPosition(1);
+        flatFileConfig.setItemPricePosition(2);
     }
 
     @Test
-    public void shouldConvertSaleData() throws Exception {
+    public void shouldConvertSaleData() {
         Sale sale = (Sale) saleService.convert("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çDiego");
         Assert.assertEquals(10L, sale.getId().longValue());
         Assert.assertEquals("Diego", sale.getSalesmanName());

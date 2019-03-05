@@ -1,5 +1,6 @@
 package br.com.flatfile.unit.route;
 
+import br.com.flatfile.FlatFileApplication;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.impl.DefaultExchange;
@@ -14,7 +15,7 @@ import java.io.File;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = FlatFileApplication.class)
 public class ConverterFlatFileRouteTest {
 
     @Autowired
