@@ -1,8 +1,6 @@
 package br.com.flatfile.unit.processor;
 
-import br.com.flatfile.processor.FileNameProcessor;
-import br.com.flatfile.processor.FlatFileContentProcessor;
-import br.com.flatfile.processor.FlatFileDataProcessor;
+import br.com.flatfile.processor.*;
 import br.com.flatfile.route.ConverterFlatFileRoute;
 import org.apache.camel.Exchange;
 import org.apache.camel.RoutesBuilder;
@@ -24,7 +22,9 @@ public class FileNameProcessorTest extends CamelTestSupport {
         fileNameProcessor = new FileNameProcessor();
         return new ConverterFlatFileRoute(fileNameProcessor,
                 Mockito.mock(FlatFileContentProcessor.class),
-                Mockito.mock(FlatFileDataProcessor.class));
+                Mockito.mock(FlatFileDataProcessor.class),
+                Mockito.mock(SummaryDataProcessor.class),
+                Mockito.mock(SummaryFileContentProcessor.class));
     }
 
     @Test

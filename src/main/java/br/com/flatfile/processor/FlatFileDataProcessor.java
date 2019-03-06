@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class FlatFileDataProcessor implements Processor {
@@ -32,14 +32,12 @@ public class FlatFileDataProcessor implements Processor {
     @Override
     public void process(Exchange exchange) {
         List<String> lines = exchange.getIn().getBody(List.class);
-        List<FlatFileData> flatFileDatas = new ArrayList<>();
-        lines.parallelStream()
-                .forEach(line -> {
+        List<FlatFileData> flatFileDatas = lines.parallelStream()
+                .map(line -> {
                     String[] dataArray = line.split(FlatFileConfig.DATA_SEPARATOR_CHARACTER);
-                    flatFileDatas.add(
-                            mapFlatFileConverter.get(dataArray[FlatFileConfig.DATA_ID_POSITION]).convert(line)
-                    );
-                });
+                    return mapFlatFileConverter.get(dataArray[FlatFileConfig.DATA_ID_POSITION]).convert(line);
+                })
+                .collect(Collectors.toList());
         exchange.getIn().setBody(flatFileDatas);
     }
 }

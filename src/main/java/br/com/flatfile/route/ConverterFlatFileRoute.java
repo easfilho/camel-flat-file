@@ -1,10 +1,7 @@
 package br.com.flatfile.route;
 
 
-import br.com.flatfile.processor.FileNameProcessor;
-import br.com.flatfile.processor.FlatFileContentProcessor;
-import br.com.flatfile.processor.FlatFileDataProcessor;
-import org.apache.camel.CamelContext;
+import br.com.flatfile.processor.*;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,12 +12,20 @@ public class ConverterFlatFileRoute extends RouteBuilder {
     private final FileNameProcessor fileNameProcessor;
     private final FlatFileContentProcessor flatFileContentProcessor;
     private final FlatFileDataProcessor flatFileDataProcessor;
+    private final SummaryDataProcessor summaryDataProcessor;
+    private final SummaryFileContentProcessor summaryFileContentProcessor;
 
     @Autowired
-    public ConverterFlatFileRoute(FileNameProcessor fileNameProcessor, FlatFileContentProcessor flatFileContentProcessor, FlatFileDataProcessor flatFileDataProcessor) {
+    public ConverterFlatFileRoute(FileNameProcessor fileNameProcessor,
+                                  FlatFileContentProcessor flatFileContentProcessor,
+                                  FlatFileDataProcessor flatFileDataProcessor,
+                                  SummaryDataProcessor summaryDataProcessor,
+                                  SummaryFileContentProcessor summaryFileContentProcessor) {
         this.fileNameProcessor = fileNameProcessor;
         this.flatFileContentProcessor = flatFileContentProcessor;
         this.flatFileDataProcessor = flatFileDataProcessor;
+        this.summaryDataProcessor = summaryDataProcessor;
+        this.summaryFileContentProcessor = summaryFileContentProcessor;
     }
 
     @Override
@@ -34,6 +39,8 @@ public class ConverterFlatFileRoute extends RouteBuilder {
                             .process(fileNameProcessor)
                             .process(flatFileContentProcessor)
                             .process(flatFileDataProcessor)
+                            .process(summaryDataProcessor)
+                            .process(summaryFileContentProcessor)
                             .to("file:data/output")
                         .endChoice()
                     .end()
