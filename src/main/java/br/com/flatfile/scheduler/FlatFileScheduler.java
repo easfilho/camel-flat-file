@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 @EnableScheduling
 public class FlatFileScheduler {
 
+    private final long DAY = 86400000;
     private final ProducerTemplate producerTemplate;
     private final Logger logger;
 
@@ -23,7 +24,7 @@ public class FlatFileScheduler {
         this.logger = LoggerFactory.getLogger(this.getClass());
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = DAY)
     public void processFlatFiles() {
         logger.info("[Flat-File-Summary] Starting processing of flat files");
         Exchange exchange = new DefaultExchange(producerTemplate.getCamelContext());
