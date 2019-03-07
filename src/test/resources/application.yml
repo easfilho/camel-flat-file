@@ -5,7 +5,7 @@ data:
     sale: "003"
 
 separator:
-  data: "ç"
+  data: "\\|"
   dataItem: "-"
   items: ","
 

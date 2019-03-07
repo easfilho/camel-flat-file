@@ -1,6 +1,6 @@
 package br.com.flatfile.unit.service;
 
-import br.com.flatfile.config.FlatFileConfig;
+import br.com.flatfile.config.FlatFileConfigTest;
 import br.com.flatfile.model.Salesman;
 import br.com.flatfile.service.SalesmanService;
 import org.junit.Assert;
@@ -16,16 +16,12 @@ public class SalesmanServiceTest {
     @Before
     public void setUp() {
         salesmanService = new SalesmanService();
-        FlatFileConfig flatFileConfig = new FlatFileConfig();
-        flatFileConfig.setDataSeparatorCharacter("ç");
-        flatFileConfig.setSalesmanTaxIdPosition(1);
-        flatFileConfig.setSalesmanNamePosition(2);
-        flatFileConfig.setSalesmanSalaryPosition(3);
+        FlatFileConfigTest.initializeFlatFileConfig();
     }
 
     @Test
     public void shouldConvertSalesmanData() {
-        Salesman salesman = (Salesman) salesmanService.convert("001ç01234567890çDiegoç50000");
+        Salesman salesman = (Salesman) salesmanService.convert("001|01234567890|Diego|50000");
         Assert.assertEquals("01234567890", salesman.getTaxId());
         Assert.assertEquals("Diego", salesman.getName());
         Assert.assertEquals(0, new BigDecimal("50000").compareTo(salesman.getSalary()));

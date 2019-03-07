@@ -1,6 +1,7 @@
 package br.com.flatfile.unit.service;
 
 import br.com.flatfile.config.FlatFileConfig;
+import br.com.flatfile.config.FlatFileConfigTest;
 import br.com.flatfile.model.Customer;
 import br.com.flatfile.service.CustomerService;
 import org.junit.Assert;
@@ -14,16 +15,12 @@ public class CustomerServiceTest {
     @Before
     public void setUp() {
         customerService = new CustomerService();
-        FlatFileConfig flatFileConfig = new FlatFileConfig();
-        flatFileConfig.setDataSeparatorCharacter("ç");
-        flatFileConfig.setCustomerTaxIdPosition(1);
-        flatFileConfig.setCustomerNamePosition(2);
-        flatFileConfig.setCustomerBusinessAreaPosition(3);
+        FlatFileConfigTest.initializeFlatFileConfig();
     }
 
     @Test
     public void shouldConvertCustomer() {
-        Customer customer = (Customer) customerService.convert("002ç2345675434544345çJose da SilvaçRural");
+        Customer customer = (Customer) customerService.convert("002|2345675434544345|Jose da Silva|Rural");
         Assert.assertEquals("2345675434544345", customer.getTaxId());
         Assert.assertEquals("Jose da Silva", customer.getName());
         Assert.assertEquals("Rural", customer.getBusinessArea());

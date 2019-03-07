@@ -35,7 +35,7 @@ public class SaleService implements FlatFileConverter {
     }
 
     private String removeInitialAndFinalBrackets(String dataListItem) {
-        return dataListItem.substring(1, dataListItem.length() - 1);
+        return dataListItem.replace("[", "").replace("]", "");
     }
 
     private SaleItem convertItem(String dataItem) {

@@ -5,6 +5,7 @@ plugins {
 
 ext['camelVersion'] = '2.23.1'
 ext['lombokVersion'] = '1.18.6'
+ext['powerMockVersion'] = '2.0.0'
 
 apply plugin: 'io.spring.dependency-management'
 
@@ -22,4 +23,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "org.apache.camel:camel-test:${camelVersion}"
 	testImplementation "org.apache.camel:camel-test-spring:${camelVersion}"
+	testImplementation "org.powermock:powermock-module-junit4:${powerMockVersion}"
+	testImplementation "org.powermock:powermock-api-mockito2:${powerMockVersion}"
 }

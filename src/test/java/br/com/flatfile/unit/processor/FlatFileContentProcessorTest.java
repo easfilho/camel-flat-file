@@ -9,12 +9,21 @@ import org.apache.camel.impl.DefaultExchange;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(FlatFileContentProcessor.class)
 public class FlatFileContentProcessorTest extends CamelTestSupport {
 
     private FlatFileContentProcessor flatFileContentProcessor;
@@ -30,14 +39,21 @@ public class FlatFileContentProcessorTest extends CamelTestSupport {
     }
 
     @Test
-    public void shouldRenameFile() throws IOException {
+    public void shouldReturnLines() throws IOException {
         GenericFile<File> genericFile = new GenericFile<>();
-        genericFile.setFile(new File("data/input/lines.dat"));
+        genericFile.setFile(new File("path"));
+        PowerMockito.mockStatic(Files.class);
+        List<String> lines = new ArrayList<>();
+        lines.add("a");
+        lines.add("b");
+
+        PowerMockito.when(Files.readAllLines(genericFile.getFile().toPath(), StandardCharsets.UTF_8)).thenReturn(lines);
+
         Exchange exchange = new DefaultExchange(super.context());
         exchange.getIn().setBody(genericFile);
         flatFileContentProcessor.process(exchange);
-        List<String> lines = exchange.getIn().getBody(List.class);
-        Assert.assertEquals("a", lines.get(0));
-        Assert.assertEquals("b", lines.get(1));
+        List<String> expectedLines = exchange.getIn().getBody(List.class);
+        Assert.assertEquals("a", expectedLines.get(0));
+        Assert.assertEquals("b", expectedLines.get(1));
     }
 }

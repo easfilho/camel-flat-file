@@ -1,6 +1,6 @@
 package br.com.flatfile.unit.service;
 
-import br.com.flatfile.config.FlatFileConfig;
+import br.com.flatfile.config.FlatFileConfigTest;
 import br.com.flatfile.model.Sale;
 import br.com.flatfile.model.SaleItem;
 import br.com.flatfile.service.SaleService;
@@ -19,21 +19,12 @@ public class SaleServiceTest {
     @Before
     public void setUp() {
         saleService = new SaleService();
-        FlatFileConfig flatFileConfig = new FlatFileConfig();
-        flatFileConfig.setDataSeparatorCharacter("ç");
-        flatFileConfig.setDataItemSeparatorCharacter("-");
-        flatFileConfig.setItemSeparatorCharacter(",");
-        flatFileConfig.setSaleIdPosition(1);
-        flatFileConfig.setSaleItemsPosition(2);
-        flatFileConfig.setSaleSalesmanPosition(3);
-        flatFileConfig.setItemIdPosition(0);
-        flatFileConfig.setItemQuantityPosition(1);
-        flatFileConfig.setItemPricePosition(2);
+        FlatFileConfigTest.initializeFlatFileConfig();
     }
 
     @Test
     public void shouldConvertSaleData() {
-        Sale sale = (Sale) saleService.convert("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çDiego");
+        Sale sale = (Sale) saleService.convert("003|10|[1-10-100,2-30-2.50,3-40-3.10]|Diego");
         Assert.assertEquals(10L, sale.getId().longValue());
         Assert.assertEquals("Diego", sale.getSalesmanName());
         List<SaleItem> expectedSaleItems = new ArrayList<>();
