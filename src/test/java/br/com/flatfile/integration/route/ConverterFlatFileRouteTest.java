@@ -1,4 +1,4 @@
-package br.com.flatfile.unit.route;
+package br.com.flatfile.integration.route;
 
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
